@@ -10,6 +10,52 @@ red='\033[0;31m'
 wipe="\033[1m\033[0m"
 yellow='\E[1;33m'
 
+if test ! -f "$OLD"; then
+        echo -e "${yellow}######################################################################################"
+        echo -e "#                              Getting Started                                       #"
+        echo -e "#                                                                                    #"
+        echo -e "#                      Use one parameter at a time the rest will be ignored         #"
+        echo -e "#                                                                                    #"
+        echo -e "#              c.rf will be created to keep track of whether you have run the       #"
+        echo -e "#              script before in order to know when this banner should be shown      #"
+        echo -e "#              it is also an easy way to check which log files are present and      #"
+        echo -e "#                      in which order they were created in.                         #"
+        echo -e "#                                                                                   #"
+        echo -e "#              It is recommended to view logs with the cat command as it keeps      #"
+        echo -e "#                      support for better formatting used in this script            #"
+        echo -e "######################################################################################${wipe}"
+
+else
+        echo -e "${yellow}######################################################################################"
+        echo -e "#                                      Quick Reference                                      #"
+        echo -e "#                                                                                    #"
+        echo -e "#                      Use one parameter at a time the rest will be ignored         #"
+        echo -e "#                                                                                    #"
+        echo -e "#                      Three file are created for use with this script listed       #"
+        echo -e "#                                                                                   #"
+        echo -e "#                      c.rf to keep track of files created                          #"
+        echo -e "#                      directory.result to log directory checks                     #"
+        echo -e "#                      file.result to log file checks                               #"
+        echo -e "#                                                                                   #"
+        echo -e "#              It is recommended to view logs with the cat command as it keeps      #"
+        echo -e "#                      support for better formatting used in this script            #"
+        echo -e "######################################################################################${wipe}"
+
+
+fi
+
+#if either the directory.result or file.result files exist we will create a file called c.rf and date when these files were one the system for each run
+if test -f "$DIR"; then
+        echo "$DIR exists"
+        echo -e "$yellow ------ $wipe"
+        echo "$(date) DIR" >> $OLD
+fi
+
+if test -f "$FIL"; then
+        echo "$FIL exists"
+        echo -e "$yellow ------ $wipe"
+        echo "$(date) FIL" >> $OLD
+fi
 
 # This wil tell us if we are handling a directory
 if [ -d "${CHECK}" ]; then
